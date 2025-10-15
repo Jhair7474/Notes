@@ -1,0 +1,18 @@
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  html, body {
+    @apply select-none bg-zinc-900 text-white font-mono antialiased overflow-hidden;
+  }
+
+  header {
+    -webkit-app-region: drag;
+  }
+
+  button {
+    -webkit-app-region: no-drag;
+  }
+}

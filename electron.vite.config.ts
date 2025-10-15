@@ -8,15 +8,15 @@ export default defineConfig({
     resolve: {
       alias: {
         '@lib': resolve('src/main/lib'),
-        '@shared': resolve('src/shared')
-      }
-    }
+        '@shared': resolve('src/shared'),
+      },
+    },
   },
   preload: {
-    plugins: [externalizeDepsPlugin()]
+    plugins: [externalizeDepsPlugin()],
   },
   renderer: {
-    assetsInclude: 'src/renderer/src/assets/**',
+    plugins: [react()],
     resolve: {
       alias: {
         '@renderer': resolve('src/renderer/src'),
@@ -25,9 +25,12 @@ export default defineConfig({
         '@/assets': resolve('src/renderer/src/assets'),
         '@/components': resolve('src/renderer/src/components'),
         '@/store': resolve('src/renderer/src/store'),
-        '@/mocks': resolve('src/renderer/src/mocks')
-      }
+        '@/mocks': resolve('src/renderer/src/mocks'),
+      },
     },
-    plugins: [react()]
-  }
+    //renderer
+   // css: {
+     // postcss:  resolve(__dirname, 'postcss.config.js'),
+    //},
+  },
 })
