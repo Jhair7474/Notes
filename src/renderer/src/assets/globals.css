@@ -1,14 +1,33 @@
+@import "tailwindcss";
 
 @layer base {
   html, body, #root {
-    height: 100%;
+    @apply h-full;
   }
 
   html, body {
     @apply select-none bg-zinc-900 text-white font-mono antialiased overflow-hidden;
   }
 
+  main {
+    @apply h-full overflow-hidden;
+  }
+
+  /* Scrollbar personalizado */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#555] rounded-md;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
   header {
+    @apply bg-zinc-800 border-b border-zinc-700 h-8 flex items-center px-3 text-sm font-semibold;
     -webkit-app-region: drag;
   }
 
