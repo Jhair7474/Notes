@@ -1,6 +1,8 @@
 import { NotePreview } from '@/components'
 import { useNotesList } from '@/hooks/useNotesList'
-import { isEmpty } from 'lodash'
+import pkg from 'lodash';
+const { isEmpty } = pkg;
+
 import { ComponentProps } from 'react'
 import { twMerge } from 'tailwind-merge'
 

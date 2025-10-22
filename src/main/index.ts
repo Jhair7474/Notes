@@ -2,8 +2,8 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
-import { GetNotes, WriteNote } from '@shared/types'
-import { getNotes, readNote, writeNote } from './lib'
+import { CreateNote, GetNotes, WriteNote } from '@shared/types'
+import { createNote, getNotes, readNote, writeNote } from './lib'
 import { ReadNote } from '../shared/types';
 
 
@@ -23,7 +23,7 @@ function createWindow(): void {
     titleBarStyle: 'hidden',
     trafficLightPosition: { x: 15, y: 10 },
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/index.mjs'),
       sandbox: false, 
       contextIsolation: true,
     },
@@ -60,6 +60,7 @@ app.whenReady().then(() => {
   ipcMain.handle('getNotes', (_, ...args: Parameters<GetNotes>) => getNotes(...args))
   ipcMain.handle('readNote', (_, ...args: Parameters<ReadNote>) => readNote(...args))
   ipcMain.handle('writeNote', (_, ...args: Parameters<WriteNote>) => writeNote(...args))
+  ipcMain.handle('createNote', (_, ...args: Parameters<CreateNote>) => createNote(...args))
 
   createWindow()
 
@@ -71,3 +72,4 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
+ 

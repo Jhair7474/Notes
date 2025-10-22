@@ -14,6 +14,13 @@ export default defineConfig({
   },
   preload: {
     plugins: [externalizeDepsPlugin()],
+     build: {
+    rollupOptions: {
+      input: {
+        index: resolve(__dirname, 'src/preload/index.ts'),
+      },
+    },
+  },
   },
   renderer: {
     plugins: [react()],
@@ -28,9 +35,7 @@ export default defineConfig({
         '@/mocks': resolve('src/renderer/src/mocks'),
       },
     },
-    //renderer
-   // css: {
-     // postcss:  resolve(__dirname, 'postcss.config.js'),
-    //},
+   
   },
 })
+ 
