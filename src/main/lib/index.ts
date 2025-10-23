@@ -5,6 +5,7 @@ import fs from "fs-extra";
 const { ensureDir, readdir, readFile, writeFile, stat, remove } = fs;
 import pkg from 'lodash';
 const { isEmpty } = pkg;
+import welcomeNoteFile from '../../../resources/welcomeNote.md?asset'
 
 
 import { homedir } from 'os'
@@ -32,9 +33,9 @@ export const getNotes: GetNotes = async () => {
   if (isEmpty(notes)) {
     console.info('No notes found, creating a welcome note')
 
-    const content = await readFile(welcomeNoteFilename, { encoding: fileEncoding })
+    const content = await readFile(welcomeNoteFile, { encoding: fileEncoding })
 
-    // create the welcome note
+   
     await writeFile(`${rootDir}/${welcomeNoteFilename}`, content, { encoding: fileEncoding })
 
     notes.push(welcomeNoteFilename)
