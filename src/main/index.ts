@@ -2,6 +2,11 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { CreateNote, DeleteNote, GetNotes, WriteNote } from '@shared/types'
+import { createNote, deleteNote, getNotes, readNote, writeNote } from './lib'
+import { ReadNote } from '../shared/types';
+
+
 
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
@@ -18,8 +23,8 @@ function createWindow(): void {
     titleBarStyle: 'hidden',
     trafficLightPosition: { x: 15, y: 10 },
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
-      sandbox: false, // ⚠️ cámbialo a false para evitar bloqueo de comunicación con renderer
+      preload: join(__dirname, '../preload/index.mjs'),
+      sandbox: false, 
       contextIsolation: true,
     },
   })
@@ -52,6 +57,12 @@ app.whenReady().then(() => {
 
   ipcMain.on('ping', () => console.log('pong'))
 
+  ipcMain.handle('getNotes', (_, ...args: Parameters<GetNotes>) => getNotes(...args))
+  ipcMain.handle('readNote', (_, ...args: Parameters<ReadNote>) => readNote(...args))
+  ipcMain.handle('writeNote', (_, ...args: Parameters<WriteNote>) => writeNote(...args))
+  ipcMain.handle('createNote', (_, ...args: Parameters<CreateNote>) => createNote(...args))
+  ipcMain.handle('deleteNote', (_, ...args: Parameters<DeleteNote>) => deleteNote(...args))
+
   createWindow()
 
   app.on('activate', function () {
@@ -62,3 +73,4 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
+ 
