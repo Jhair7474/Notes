@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body, #root {
+    @apply h-full;
+  }
+
+  html, body {
+    @apply select-none font-mono antialiased overflow-hidden;
+    background-color: var(--color-background);
+    color: var(--color-text);
+  }
+
+  main {
+    @apply h-full overflow-hidden;
+  }
+
+ 
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md hover:bg-blue-700 transition-colors;
+    background-color: var(--color-primary);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-background-soft);
+  }
+
+  header {
+    @apply h-8 flex items-center px-3 text-sm font-semibold;
+    background-color: var(--color-background-soft);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    -webkit-app-region: drag;
+  }
+
+  button {
+    -webkit-app-region: no-drag;
+  }
+}

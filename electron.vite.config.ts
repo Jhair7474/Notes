@@ -4,17 +4,38 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   main: {
-    plugins: [externalizeDepsPlugin()]
-  },
-  preload: {
-    plugins: [externalizeDepsPlugin()]
-  },
-  renderer: {
+    plugins: [externalizeDepsPlugin()],
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer/src')
-      }
+        '@lib': resolve('src/main/lib'),
+        '@shared': resolve('src/shared'),
+      },
     },
-    plugins: [react()]
-  }
+  },
+  preload: {
+    plugins: [externalizeDepsPlugin()],
+     build: {
+    rollupOptions: {
+      input: {
+        index: resolve(__dirname, 'src/preload/index.ts'),
+      },
+    },
+  },
+  },
+  renderer: {
+    plugins: [react()],
+    resolve: {
+      alias: {
+        '@renderer': resolve('src/renderer/src'),
+        '@shared': resolve('src/shared'),
+        '@/hooks': resolve('src/renderer/src/hooks'),
+        '@/assets': resolve('src/renderer/src/assets'),
+        '@/components': resolve('src/renderer/src/components'),
+        '@/store': resolve('src/renderer/src/store'),
+        '@/mocks': resolve('src/renderer/src/mocks'),
+      },
+    },
+   
+  },
 })
+ 
