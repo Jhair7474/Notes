@@ -5,13 +5,21 @@ An Electron application with React and TypeScript
 ## Dependencia de APP de Notas
 
 npm install -D tailwindcss postcss autoprefixer
+
 npx tailwindcss init -p
+
 npm install -D tailwind-merge
+
 npm install -D clsx
+
 npm install -D react-icons
+
 npm install -D @tailwindcss/postcss
+
 npm install @mdxeditor/editor
+
 npm install -D @tailwindcss/typography
+
 npm install jotai
 
 ## Recommended IDE Setup
