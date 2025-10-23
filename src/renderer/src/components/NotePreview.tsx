@@ -17,15 +17,20 @@ export const NotePreview = ({
 
   return (
     <div
-      className={cn(
-        'cursor-pointer px-2.5 py-3 rounded-md transition-colors duration-75',
-        isActive ? 'bg-zinc-800' : 'hover:bg-zinc-700',
-        className
-      )}
-      {...props}
-    >
-      <h3 className="mb-1 font-bold truncate">{title}</h3>
-      <span className="block text-xs text-zinc-400">{date}</span>
-    </div>
+  className={cn(
+    'cursor-pointer px-2.5 py-3 rounded-md transition-colors duration-100',
+    {
+      'bg-blue-700/70': isActive,
+      
+      'hover:bg-blue-600/60': !isActive
+    },
+    className
+  )}
+  {...props}
+>
+  <h3 className="mb-1 font-bold truncate text-blue-100">{title}</h3>
+  <span className="block text-xs text-blue-300 font-light">{date}</span>
+</div>
+
   )
 }

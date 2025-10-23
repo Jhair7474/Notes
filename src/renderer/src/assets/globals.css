@@ -6,28 +6,34 @@
   }
 
   html, body {
-    @apply select-none bg-zinc-900 text-white font-mono antialiased overflow-hidden;
+    @apply select-none font-mono antialiased overflow-hidden;
+    background-color: var(--color-background);
+    color: var(--color-text);
   }
 
   main {
     @apply h-full overflow-hidden;
   }
 
-  /* Scrollbar personalizado */
+ 
   ::-webkit-scrollbar {
     @apply w-2;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-[#555] rounded-md;
+    @apply rounded-md hover:bg-blue-700 transition-colors;
+    background-color: var(--color-primary);
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-transparent;
+    background-color: var(--color-background-soft);
   }
 
   header {
-    @apply bg-zinc-800 border-b border-zinc-700 h-8 flex items-center px-3 text-sm font-semibold;
+    @apply h-8 flex items-center px-3 text-sm font-semibold;
+    background-color: var(--color-background-soft);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-muted);
     -webkit-app-region: drag;
   }
 
