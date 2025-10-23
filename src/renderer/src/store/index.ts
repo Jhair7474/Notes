@@ -96,12 +96,12 @@ export const deleteNoteAtom = atom(null, async (get, set) => {
 
   if (!isDeleted) return
 
-  // filter out the deleted note
+  
   set(
     notesAtom,
     notes.filter((note) => note.title !== selectedNote.title)
   )
 
-  // de select any note
+ 
   set(selectedNoteIndexAtom, null)
 })

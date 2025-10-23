@@ -2,7 +2,7 @@ import { appDirectoryName, fileEncoding, welcomeNoteFilename } from '@shared/con
 import { NoteInfo } from '@shared/models'
 import { GetNotes, ReadNote, WriteNote } from '@shared/types'
 import fs from "fs-extra";
-const { ensureDir, readdir, readFile, writeFile, stat } = fs;
+const { ensureDir, readdir, readFile, writeFile, stat, remove } = fs;
 import pkg from 'lodash';
 const { isEmpty } = pkg;
 
@@ -87,7 +87,7 @@ export const createNote: CreateNote = async () => {
 
   const { name: filename, dir: parentDir } = path.parse(filePath)
 
-  if (parentDir !== rootDir) {
+  if (path.resolve(parentDir) !== path.resolve(rootDir)) {
     await dialog.showMessageBox({
       type: 'error',
       title: 'Creation failed',
@@ -102,4 +102,26 @@ export const createNote: CreateNote = async () => {
   await writeFile(filePath, '')
 
   return filename
+}
+
+export const deleteNote: DeleteNote = async (filename) => {
+  const rootDir = getRootDir()
+
+  const { response } = await dialog.showMessageBox({
+    type: 'warning',
+    title: 'Delete note',
+    message: `Are you sure you want to delete ${filename}?`,
+    buttons: ['Delete', 'Cancel'], 
+    defaultId: 1,
+    cancelId: 1
+  })
+
+  if (response === 1) {
+    console.info('Note deletion canceled')
+    return false
+  }
+
+  console.info(`Deleting note: ${filename}`)
+  await remove(`${rootDir}/${filename}.md`)
+  return true
 }
