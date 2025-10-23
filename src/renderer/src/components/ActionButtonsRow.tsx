@@ -6,7 +6,7 @@ export const ActionButtonsRow = ({ className, ...props }: ComponentProps<'div'>)
   return (
     <div
       className={twMerge(
-        'flex justify-between items-center gap-2 pt-8 px-1 sticky top-8 bg-zinc-900/50 z-40',
+        'flex justify-between items-center gap-2 px-2 py-2 sticky top-0 bg-[#0f172a] border-b border-blue-900/40 z-40',
         className
       )}
       {...props}
@@ -16,3 +16,4 @@ export const ActionButtonsRow = ({ className, ...props }: ComponentProps<'div'>)
     </div>
   )
 }
+

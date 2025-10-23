@@ -18,7 +18,8 @@ export const NotePreviewList = ({ onSelect, className, ...props }: NotePreviewLi
   if (isEmpty(notes)) {
     return (
       <ul className={twMerge('text-center pt-4', className)} {...props}>
-        <span>No Notes Yet!</span>
+        <span className="text-blue-400 italic">No Notes Yet!</span>
+
       </ul>
     )
   }

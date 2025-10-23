@@ -31,7 +31,7 @@ export const getNotes: GetNotes = async () => {
   const notes = notesFileNames.filter((fileName) => fileName.endsWith('.md'))
 
   if (isEmpty(notes)) {
-    console.info('No notes found, creating a welcome note')
+    console.info('No se encontro notas, creandoo la nota welcome')
 
     const content = await readFile(welcomeNoteFile, { encoding: fileEncoding })
 
@@ -63,7 +63,7 @@ export const readNote: ReadNote = async (filename) => {
 export const writeNote: WriteNote = async (filename, content) => {
     const rootDir = getRootDir()
   
-    console.info(`Writing note ${filename}`)
+    console.info(`Escribiendo nota ${filename}`)
     return writeFile(`${rootDir}/${filename}.md`, content, { encoding: fileEncoding })
   }
    
@@ -82,7 +82,7 @@ export const createNote: CreateNote = async () => {
   })
 
    if (canceled || !filePath) {
-    console.info('Note creation canceled')
+    console.info('Creacion de nota cancelada')
     return false
   }
 
@@ -91,15 +91,15 @@ export const createNote: CreateNote = async () => {
   if (path.resolve(parentDir) !== path.resolve(rootDir)) {
     await dialog.showMessageBox({
       type: 'error',
-      title: 'Creation failed',
-      message: `All notes must be saved under ${rootDir}.
-      Avoid using other directories!`
+      title: 'Creacion de nota fallida',
+      message: `Todas las notas deben guardarse en ${rootDir}.
+      No uses otras carpetas para almacenar tus notas.`
     })
 
     return false
   }
 
-  console.info(`Creating note: ${filePath}`)
+  console.info(`Creando nota: ${filePath}`)
   await writeFile(filePath, '')
 
   return filename
@@ -110,19 +110,19 @@ export const deleteNote: DeleteNote = async (filename) => {
 
   const { response } = await dialog.showMessageBox({
     type: 'warning',
-    title: 'Delete note',
-    message: `Are you sure you want to delete ${filename}?`,
+    title: 'Eliminar nota',
+    message: `Estas seguro de eliminar la nota ${filename}?`,
     buttons: ['Delete', 'Cancel'], 
     defaultId: 1,
     cancelId: 1
   })
 
   if (response === 1) {
-    console.info('Note deletion canceled')
+    console.info('Eliminacion de nota cancelada')
     return false
   }
 
-  console.info(`Deleting note: ${filename}`)
+  console.info(`Nota eliminada: ${filename}`)
   await remove(`${rootDir}/${filename}.md`)
   return true
-}
+} 
